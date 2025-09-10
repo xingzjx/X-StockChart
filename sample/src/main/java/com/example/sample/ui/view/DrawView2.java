@@ -13,6 +13,7 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 // ... 原有import保持不变 ...
@@ -71,18 +72,31 @@ public class DrawView2 extends View {
         if ((mDrawState == DrawState.NONE || mDrawState == DrawState.EDIT) && event.getAction() == MotionEvent.ACTION_DOWN) {// 记录点击的位置
             // 点击的位置在历史的水平线上，则进入编辑状态
             boolean isHit = false;
-            for (Float y : mHorizontalLines) {
+//            for (Float y : mHorizontalLines) {
+//                if (Math.abs(event.getY() - y) < CIRCLE_RADIUS) {
+//                    isHit = true;
+//                    mDrawState = DrawState.DRAWING;
+//                    // mDrawShape = DrawShape.HORIZONTAL_LINE;
+//                    mCurrentPoint.set(event.getX(), y);
+//                    invalidate();
+//                    // 清理当前水平线
+//                    mHorizontalLines.remove(y);
+//                    // return true;
+//                }
+//            }
+            Iterator<Float> iterator = mHorizontalLines.iterator();
+            while (iterator.hasNext()) {
+                Float y = iterator.next();
                 if (Math.abs(event.getY() - y) < CIRCLE_RADIUS) {
                     isHit = true;
                     mDrawState = DrawState.DRAWING;
-                    // mDrawShape = DrawShape.HORIZONTAL_LINE;
                     mCurrentPoint.set(event.getX(), y);
                     invalidate();
-                    // 清理当前水平线
-                    mHorizontalLines.remove(y);
-                    // return true;
+                    iterator.remove();  // 关键修改：通过迭代器删除元素
+                    // break;
                 }
             }
+
             if (!isHit) {
                 mCurrentPoint.set(-100, -100);
                 mDrawState = DrawState.NONE;
