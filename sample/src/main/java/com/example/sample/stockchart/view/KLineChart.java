@@ -90,6 +90,7 @@ public class KLineChart extends LinearLayout {
         mCandleChart.setNoDataText(getResources().getString(R.string.loading));
         mCandleChart.setDescription(null);
         mCandleChart.setAutoScaleMinMaxEnabled(true);
+        mCandleChart.setPinchZoom(true);
         //图例
         final Legend legend = mCandleChart.getLegend();
         legend.setEnabled(false);
