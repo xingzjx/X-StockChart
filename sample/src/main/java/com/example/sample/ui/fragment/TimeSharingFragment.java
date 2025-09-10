@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.annotation.Nullable;
+
 import butterknife.BindView;
 
 /**
@@ -48,7 +49,7 @@ public class TimeSharingFragment extends BaseFragment {
     }
 
     @Override
-    protected void onLoadData(View rootView) {
+    protected void onLoadData() {
         mChart.initChart();
 
         //测试数据
@@ -62,5 +63,10 @@ public class TimeSharingFragment extends BaseFragment {
         dataManage.parseTimeData(object, 0);
         dataManage.setBSChart(mIsBSChart);
         mChart.setDataToChart(dataManage);
+    }
+
+    @Override
+    protected void initView() {
+
     }
 }

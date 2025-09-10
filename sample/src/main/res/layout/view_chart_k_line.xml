@@ -1,20 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-       xmlns:tools="http://schemas.android.com/tools"
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical"
-       tools:parentTag="android.widget.LinearLayout">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:parentTag="android.widget.LinearLayout">
 
-    <com.github.mikephil.charting.charts.CombinedChart
-        android:id="@+id/view_chart_k_line_candle_chart"
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"/>
+        android:layout_weight="3">
+
+        <com.github.mikephil.charting.charts.CombinedChart
+            android:id="@+id/view_chart_k_line_candle_chart"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.example.sample.ui.view.DrawView2
+            android:id="@+id/draw_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
 
     <com.example.sample.stockchart.view.KLineCombinedChart
         android:id="@+id/view_chart_k_line_bar_chart"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_draw_horizontal_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="绘制水平线" />
+    </LinearLayout>
 </merge>

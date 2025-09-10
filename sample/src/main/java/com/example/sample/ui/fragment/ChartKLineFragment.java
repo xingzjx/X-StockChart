@@ -11,11 +11,14 @@ import com.example.sample.common.data.Constants;
 import com.example.sample.stockchart.data.KLineDataManage;
 import com.example.sample.stockchart.listener.CoupleChartGestureListener;
 import com.example.sample.stockchart.view.KLineChart;
+import com.example.sample.ui.view.DrawView;
+import com.example.sample.ui.view.DrawView2;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import androidx.annotation.Nullable;
+
 import butterknife.BindView;
 
 /**
@@ -29,6 +32,7 @@ public class ChartKLineFragment extends BaseFragment {
     private int mType;//日K：1；周K：7；月K：30
     private int mIndexType = 1;
     private KLineDataManage mDataManage;
+    private DrawView2 mDrawView;
 
     public static ChartKLineFragment newInstance(int type) {
         final ChartKLineFragment fragment = new ChartKLineFragment();
@@ -52,7 +56,7 @@ public class ChartKLineFragment extends BaseFragment {
     }
 
     @Override
-    protected void onLoadData(View rootView) {
+    protected void onLoadData() {
         mDataManage = new KLineDataManage(getActivity());
         mChart.initChart();
 
@@ -88,6 +92,17 @@ public class ChartKLineFragment extends BaseFragment {
         };
         mChart.gestureListenerCandle.setOnEdgeListener(onEdgeListener);
         mChart.gestureListenerBar.setOnEdgeListener(onEdgeListener);
+    }
+
+    @Override
+    protected void initView() {
+        mDrawView = mRootView.findViewById(R.id.draw_view);
+        // mDrawView.startDrawShape(DrawView.DrawMode.HORIZONTAL_LINE);
+        mRootView.findViewById(R.id.btn_draw_horizontal_line).setOnClickListener(v -> {
+            // mDrawView.startDrawShape(DrawView.DrawMode.HORIZONTAL_LINE);
+            // mDrawView.setDrawShape(DrawView2.DrawShape.HORIZONTAL_LINE);
+            mDrawView.setDrawState(DrawView2.DrawState.DRAWING);
+        });
     }
 
     private void loadIndexData(int type) {

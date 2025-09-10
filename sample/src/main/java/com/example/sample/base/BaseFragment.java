@@ -20,7 +20,7 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment {
     protected Activity mActivity;
     private Unbinder mUnbinder;
-    private View mRootView = null;
+    protected View mRootView = null;
 
     private boolean isViewCreated; // 界面是否已创建完成
     private boolean isVisibleToUser; // 是否对用户可见
@@ -28,7 +28,8 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getLayoutId();
 
-    protected abstract void onLoadData(View rootView);
+    protected abstract void onLoadData();
+    protected abstract void initView();
 
     @Override
     public void onAttach(Activity activity) {
@@ -42,6 +43,7 @@ public abstract class BaseFragment extends Fragment {
             mRootView = inflater.inflate(getLayoutId(), container, false);
             mUnbinder = ButterKnife.bind(this, mRootView);
         }
+        initView();
         return mRootView;
     }
 
@@ -65,7 +67,7 @@ public abstract class BaseFragment extends Fragment {
     private void tryLoadData() {
         if (isViewCreated && isVisibleToUser && isParentVisible() && !isDataLoaded) {
             if (getLayoutId() > 0) {
-                onLoadData(mRootView);
+                onLoadData();
             }
             isDataLoaded = true;
             //通知子Fragment请求数据

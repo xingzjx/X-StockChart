@@ -70,5 +70,6 @@ public class StockDetailActivity extends BaseActivity {
         mViewpager.setOffscreenPageLimit(fragments.length);
         mViewpager.setAdapter(new SimpleFragmentPagerAdapter(getSupportFragmentManager(), fragments, titles));
         mTabLayout.setupWithViewPager(mViewpager);
+        mViewpager.setCurrentItem(2);
     }
 }
